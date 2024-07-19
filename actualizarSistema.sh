@@ -7,8 +7,6 @@ function imprimirMensaje {
 if [ -f /etc/debian_version ]; then
 	sudo apt update
 	sudo apt full-upgrade
-	sudo apt autoremove
-	sudo apt autoclean
 	clear
 	imprimirMensaje
 elif [ -f /etc/arch-release ]; then

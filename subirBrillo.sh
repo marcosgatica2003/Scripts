@@ -1,23 +1,19 @@
 #!/bin/bash
 
-# Define la ruta del archivo de brillo
-brightness_file="/sys/class/backlight/amdgpu_bl0/brightness"
-
 # Obtiene el valor actual de brillo
-current_brightness=$(cat "$brightness_file")
+current_brightness=$(xrandr --verbose | grep -i brightness | cut -f2 -d ' ' | head -n1)
 
 # Define el incremento de brillo
-increment=10
+increment=0.1
 
 # Calcula el nuevo valor de brillo
-new_brightness=$((current_brightness + increment))
+new_brightness=$(echo "$current_brightness + $increment" | bc)
 
 # Limita el nuevo valor de brillo para evitar errores
-max_brightness=$(cat "/sys/class/backlight/amdgpu_bl0/max_brightness")
-if [ "$new_brightness" -gt "$max_brightness" ]; then
-    new_brightness=$max_brightness
+if (( $(echo "$new_brightness > 1.0" | bc -l) )); then
+    new_brightness=1.0
 fi
 
-# Establece el nuevo valor de brillo
-echo "$new_brightness" | sudo tee "$brightness_file" >/dev/null
+# Aplica el nuevo valor de brillo
+xrandr --output eDP-1 --brightness "$new_brightness"
 
