@@ -7,12 +7,12 @@ function imprimirMensaje {
 if [ -f /etc/debian_version ]; then
 	sudo apt update
 	sudo apt full-upgrade
-	limpiarAPT
 	imprimirMensaje
 elif [ -f /etc/arch-release ]; then
 	sudo pacman -Syu
 	yay -Syu
-	limpiarPacman
+	sudo pacman -Scc
+	yay -Scc
 	imprimirMensaje
 else
 	echo "Sistema no soportado"
