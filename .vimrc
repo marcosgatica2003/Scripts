@@ -24,7 +24,7 @@ filetype plugin indent on
 "---------------------------------------------------------
 packadd YouCompleteMe
 
-colorscheme slate
+colorscheme morning 
 
 syntax enable
 
