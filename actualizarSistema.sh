@@ -10,9 +10,7 @@ if [ -f /etc/debian_version ]; then
 	imprimirMensaje
 elif [ -f /etc/arch-release ]; then
 	sudo pacman -Syu
-	yay -Syu
-	sudo pacman -Scc
-	yay -Scc
+	yay --aur -Syu
 	imprimirMensaje
 else
 	echo "Sistema no soportado"
